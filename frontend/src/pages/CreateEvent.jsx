@@ -58,7 +58,7 @@ const CreateEvent = () => {
 
     try {
       const token = localStorage.getItem("auth-token");
-      await axios.post("http://localhost:5000/api/events", data, {
+      await axios.post("https://backend-fhej.onrender.com/api/events", data, {
         headers: {
           "x-auth-token": token,
           "Content-Type": "multipart/form-data",

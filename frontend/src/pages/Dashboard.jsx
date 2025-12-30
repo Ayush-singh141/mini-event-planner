@@ -11,7 +11,9 @@ const Dashboard = () => {
 
   const fetchEvents = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/events");
+      const res = await axios.get(
+        "https://backend-fhej.onrender.com/api/events"
+      );
       setEvents(res.data);
       setLoading(false);
     } catch (err) {
@@ -30,7 +32,7 @@ const Dashboard = () => {
       if (!token) return alert("Please login to RSVP");
 
       await axios.post(
-        `http://localhost:5000/api/events/${eventId}/rsvp`,
+        `https://backend-fhej.onrender.com/api/events/${eventId}/rsvp`,
         { action },
         { headers: { "x-auth-token": token } }
       );
@@ -45,9 +47,12 @@ const Dashboard = () => {
     if (!window.confirm("Are you sure you want to delete this event?")) return;
     try {
       const token = localStorage.getItem("auth-token");
-      await axios.delete(`http://localhost:5000/api/events/${eventId}`, {
-        headers: { "x-auth-token": token },
-      });
+      await axios.delete(
+        `https://backend-fhej.onrender.com/api/events/${eventId}`,
+        {
+          headers: { "x-auth-token": token },
+        }
+      );
       setEvents(events.filter((e) => e._id !== eventId));
     } catch (err) {
       alert(err.response?.data?.message || "Delete Failed");
